@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phép toán và Tính toán</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        input {
+            margin: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Phép toán và Tính toán</h1>
+
+    <!-- Phép toán giữa hai số a và b -->
+    <div class="container">
+        <h2>Phép toán giữa hai số a và b</h2>
+        <label for="num1">Nhập số a:</label>
+        <input type="number" id="num1">
+        <br>
+        <label for="num2">Nhập số b:</label>
+        <input type="number" id="num2">
+        <br>
+        <button onclick="performOperations()">Tính toán</button>
+        <p id="operationResult"></p>
+    </div>
+
+    <!-- Giải phương trình bậc nhất ax + b = 0 -->
+    <div class="container">
+        <h2>Giải phương trình bậc nhất ax + b = 0</h2>
+        <label for="aValue">Nhập hệ số a:</label>
+        <input type="number" id="aValue">
+        <br>
+        <label for="bValue">Nhập hằng số b:</label>
+        <input type="number" id="bValue">
+        <br>
+        <button onclick="solveEquation()">Giải phương trình</button>
+        <p id="equationResult"></p>
+    </div>
+
+    <!-- Tính số ngày trong một tháng -->
+    <div class="container">
+        <h2>Tính số ngày trong một tháng</h2>
+        <label for="month">Nhập tháng (1-12):</label>
+        <input type="number" id="month" min="1" max="12">
+        <br>
+        <label for="year">Nhập năm:</label>
+        <input type="number" id="year">
+        <br>
+        <button onclick="calculateDays()">Tính số ngày</button>
+        <p id="daysResult"></p>
+    </div>
+
+    <script>
+        // Phép toán giữa hai số a và b
+        function performOperations() {
+            var a = parseFloat(document.getElementById("num1").value);
+            var b = parseFloat(document.getElementById("num2").value);
+
+            if (isNaN(a) || isNaN(b)) {
+                alert("Vui lòng nhập đầy đủ số a và b");
+                return;
+            }
+
+            var sum = a + b;
+            var diff = a - b;
+            var product = a * b;
+            var quotient = (b !== 0) ? (a / b) : "Không thể chia cho 0";
+
+            document.getElementById("operationResult").innerHTML = `
+                Tổng: ${sum}<br>
+                Hiệu: ${diff}<br>
+                Tích: ${product}<br>
+                Thương: ${quotient}
+            `;
+        }
+
+        // Giải phương trình ax + b = 0
+        function solveEquation() {
+            var a = parseFloat(document.getElementById("aValue").value);
+            var b = parseFloat(document.getElementById("bValue").value);
+
+            if (isNaN(a) || isNaN(b)) {
+                alert("Vui lòng nhập đầy đủ hệ số a và b");
+                return;
+            }
+
+            if (a === 0) {
+                document.getElementById("equationResult").innerHTML = (b === 0) ? 
+                "Phương trình vô số nghiệm" : "Phương trình vô nghiệm";
+            } else {
+                var x = -b / a;
+                document.getElementById("equationResult").innerHTML = `Nghiệm của phương trình là x = ${x}`;
+            }
+        }
+        // Tính số ngày trong tháng
+        function calculateDays() {
+            var month = parseInt(document.getElementById("month").value);
+            var year = parseInt(document.getElementById("year").value);
+
+            if (isNaN(month) || isNaN(year) || month < 1 || month > 12) {
+                alert("Vui lòng nhập tháng và năm hợp lệ");
+                return;
+            }
+
+            var daysInMonth = new Date(year, month, 0).getDate();
+            document.getElementById("daysResult").innerHTML = `Tháng ${month} năm ${year} có ${daysInMonth} ngày.`;
+        }
+    </script>
+
+</body>
+</html>
